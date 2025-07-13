@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emre Akkaya | Portfolyo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      color: white;
+      padding: 4rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+      background-size: 50px 50px;
+      animation: float 20s infinite linear;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-100px); }
+    }
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+    header p {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+    header img {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      margin-top: 1rem;
+      border: 6px solid white;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    header img:hover {
+      transform: scale(1.05);
+    }
+    nav {
+      background: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 1rem;
+      z-index: 999;
+      font-size: 1.2rem;
+      width: 100%;
+    }
+    nav a {
+      text-decoration: none;
+      color: #0ea5e9;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      position: relative;
+      white-space: nowrap;
+    }
+    nav a:hover {
+      color: #38bdf8;
+      background: rgba(14, 165, 233, 0.1);
+      transform: translateY(-2px);
+    }
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 4rem 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      color: #38bdf8;
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+      border-radius: 2px;
+    }
+    #about p {
+      font-size: 1.3rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .project-card {
+      background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .project-card:hover::before {
+      transform: translateX(100%);
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .project-image {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      padding: 10px;
+    }
+    .project-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+    .project-card p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .skill {
+      background: linear-gradient(45deg, #0ea5e9, #38bdf8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: transform 0.2s ease;
+    }
+    .skill:hover {
+      transform: scale(1.05);
+    }
+    .project-card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+    .project-card a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    #experience, #certificates, #skills {
+      background: rgba(30, 41, 59, 0.3);
+      border-radius: 20px;
+      margin: 2rem 0;
+    }
+    #experience ul, #certificates ul,#skills {
+      list-style: none;
+      max-width: 900px;
+     margin: 0 auto;
+     text-align: center; /* Ortalama için eklendi */
+     padding: 0;         /* Kenar boşlukları sıfırlandı */
+    }
+    #skills {
+     max-width: 1000px;
+    margin: 0 auto;
+    }
+
+    #experience li, #certificates li {
+      background: rgba(14, 165, 233, 0.1);
+      margin: 1.5rem 0;
+      padding: 2rem;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      border-left: 4px solid #0ea5e9;
+      transition: all 0.3s ease;
+    }
+    #experience li:hover, #certificates li:hover {
+      transform: translateX(10px);
+      background: rgba(14, 165, 233, 0.15);
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .skill-category {
+      background: rgba(14, 165, 233, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      border-left: 4px solid #0ea5e9;
+    }
+    .skill-category:hover {
+      transform: translateY(-5px);
+      background: rgba(14, 165, 233, 0.15);
+    }
+    .skill-category h3 {
+      color: #38bdf8;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-item {
+      background: linear-gradient(45deg, #0ea5e9, #38bdf8);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: transform 0.2s ease;
+    }
+    .skill-item:hover {
+      transform: scale(1.05);
+    }
+    #contact {
+      background: rgba(30, 41, 59, 0.3);
+      border-radius: 20px;
+      text-align: center;
+    }
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .contact-item {
+      background: rgba(14, 165, 233, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+    .contact-item:hover {
+      transform: translateY(-5px);
+      background: rgba(14, 165, 233, 0.15);
+    }
+    .contact-item i {
+      font-size: 2rem;
+      color: #0ea5e9;
+      margin-bottom: 1rem;
+    }
+    .contact-item h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #38bdf8;
+    }
+    .contact-item p, .contact-item a {
+      font-size: 1.1rem;
+      color: #e2e8f0;
+      text-decoration: none;
+    }
+    .contact-item a:hover {
+      color: #38bdf8;
+    }
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 3rem 1rem;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+      nav {
+        position: static;
+        flex-direction: row;
+        gap: 0.5rem;
+        padding: 0.8rem;
+        justify-content: space-around;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 1rem;
+      }
+      header h1 {
+        font-size: 2.5rem;
+      }
+      header p {
+        font-size: 1.1rem;
+      }
+      header img {
+        width: 200px;
+        height: 200px;
+      }
+      h2 {
+        font-size: 2.2rem;
+      }
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      section {
+        padding: 2rem 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      nav {
+        gap: 0.3rem;
+        padding: 0.6rem;
+      }
+      nav a {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      header img {
+        width: 180px;
+        height: 180px;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+    #skills, #experience, #certificates {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #experience ul, #certificates ul ,#skills {
+      text-align: left; /* Liste içeriği solda kalsın */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Emre Akkaya</h1>
+    <p>Yazılım Geliştirici | Yapay Zeka Geliştirici | Oyun Geliştirici</p>
+    <img src="emreakkaya.jpg" alt="Emre Akkaya">
+  </header>
+
+  <nav>
+    <a href="#about"><i class="fas fa-user"></i> Hakkımda</a>
+    <a href="#projects"><i class="fas fa-code"></i> Projeler</a>
+    <a href="#skills"><i class="fas fa-cogs"></i> Yetenekler</a>
+    <a href="#experience"><i class="fas fa-briefcase"></i> Deneyim</a>
+    <a href="#certificates"><i class="fas fa-certificate"></i> Sertifikalar</a>
+    <a href="#contact"><i class="fas fa-envelope"></i> İletişim</a>
+  </nav>
+
+  <section id="about">
+    <h2>Hakkımda</h2>
+    <p>Kütahya Sağlık Bilimleri Üniversitesi Bilgisayar Mühendisliği mezunu olarak, teknoloji dünyasında kendimi sürekli geliştiren bir yazılım geliştiricisiyim. Python, C#, Unity, React Native ve SQL gibi modern teknolojilerle çeşitli projeler geliştirdim.Yapay zeka, görüntü işleme, oyun geliştirme,mobil uygulama geliştirme ve .Net alanlarında çalışmalar yapıyorum.Yenilikçi çözümler üretmeyi ve teknolojiyi hayatı kolaylaştırmak için kullanmayı seviyorum.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projeler</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="plaka.jpg" alt="Plaka Tanıma Sistemi" class="project-image">
+        <h3>Hibrit Veri Seti Oluşturularak Gerçek Zamanlı Türkiye Araç Plakaları Tanıma Sistemi Geliştirilmesi</h3>
+        <p>Düşük donanım  gereksinimleriyle ve gerçek zamanlı çalışan, Türkiye plaka formatları için optimize edilmiş akıllı plaka tanıma sistemi. Modern görüntü işleme teknikleri,yapay zeka algoritmaları ve dinamik bellek yönetimi kullanılarak geliştirilmiştir. Yüksek doğruluk oranı ve hızlı işleme kapasitesi ile öne çıkmaktadır.</p>
+        <div class="skills">
+          <div class="skill">Python</div><div class="skill">OpenCV</div><div class="skill">Yapay Zeka</div><div class="skill">Görüntü İşleme</div>
+        </div>
+        <a href="https://github.com/eakkaya0/Development-of-a-Real-Time-License-Plate-Recognition-System-for-Turkey-with-a-Hybrid-Dataset" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+      
+      <div class="project-card">
+        <img src="ruthless.png" alt="Ruthless 2D Platform Oyunu" class="project-image">
+        <h3>Ruthless – 2D Platform Oyunu</h3>
+        <p>Unity game engine kullanılarak geliştirilen aksiyon dolu 2D platform oyunu. Etkileyici görsel efektler, akıcı animasyonlar ve zorlu seviyeleriyle oyunculara eğlenceli bir deneyim sunuyor.</p>
+        <div class="skills">
+          <div class="skill">C#</div><div class="skill">Unity</div><div class="skill">Oyun Geliştirme</div><div class="skill">2D Animasyon</div>
+        </div>
+        <a href="https://github.com/eakkaya0/RUTHLESS" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+      
+      <div class="project-card">
+        <img src="gan.png" alt="GAN ile Beyin Tümörü MRI" class="project-image">
+        <h3>GAN ile Beyin Tümörü MRI Görüntüsü Üretimi</h3>
+        <p>Beyin tümörlerinin erken teşhisi için Generative Adversarial Networks (GAN) kullanılarak sentetik MRI görüntüleri üretilmesi projesi. Medikal görüntü analizi ve yapay zeka teknolojilerini birleştiren bu çalışma, sağlık alanında yapay zekanın potansiyelini göstermektedir.</p>
+        <div class="skills">
+          <div class="skill">Python</div><div class="skill">TensorFlow</div><div class="skill">Deep Learning</div><div class="skill">Medikal AI</div>
+        </div>
+        <a href="https://github.com/eakkaya0/Generating-Brain-Tumor-MRI-Images-with-GAN" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+      
+      <div class="project-card">
+        <img src="apartman.png" alt="Apartman Yönetim Sistemi" class="project-image">
+        <h3>Apartman Yönetim Sistemi</h3>
+        <p>Apartman yöneticileri için geliştirilmiş kapsamlı masaüstü uygulama. Gelir-gider takibi, daire bilgileri yönetimi, aidat hesaplamaları ve raporlama özellikleri içermektedir. Kullanıcı dostu arayüz ile apartman yönetimini kolaylaştırmaktadır.</p>
+        <div class="skills">
+          <div class="skill">C#</div><div class="skill">SQL Server</div><div class="skill">Windows Forms</div><div class="skill">Veritabanı</div>
+        </div>
+        <a href="https://github.com/eakkaya0/ApartmanOtomasyon" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+      
+      <div class="project-card">
+        <img src="butce.jpg" alt="Budget Tracker Mobil Uygulama" class="project-image">
+        <h3>Budget Tracker (Mobil Uygulama)</h3>
+        <p>React Native ile geliştirilen kişisel finans yönetimi uygulaması. Gelir-gider takibi, kategori bazlı analiz, grafik raporlar ve bütçe hedefleri belirleme özellikleri bulunmaktadır. Firebase entegrasyonu ile gerçek zamanlı veri senkronizasyonu sağlanmaktadır.</p>
+        <div class="skills">
+          <div class="skill">React Native</div><div class="skill">JavaScript</div><div class="skill">Firebase</div><div class="skill">Mobil Geliştirme</div>
+        </div>
+        <a href="https://github.com/eakkaya0/Budget-Tracker" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+      
+      <div class="project-card">
+        <img src="survivor.png" alt="Survivor 3D FPS Oyunu" class="project-image">
+        <h3>Survivor – 3D FPS Oyunu</h3>
+        <p>Unity ile geliştirilen birinci şahıs nişancı oyunu. Gerçekçi 3D grafikler, akıcı oyun mekaniği ve zorlu düşman yapay zekası ile hayatta kalma deneyimi sunuyor. Silah sistemleri, sağlık yönetimi ve skor sistemi gibi temel FPS oyun özelliklerini içermektedir.</p>
+        <div class="skills">
+          <div class="skill">C#</div><div class="skill">Unity 3D</div><div class="skill">Oyun Geliştirme</div><div class="skill">3D Modelleme</div>
+        </div>
+        <a href="https://github.com/eakkaya0/Survivor" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Yetenekler</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3><i class="fas fa-code"></i> Teknik Yetenekler</h3>
+        <div style="margin-bottom: 1rem;">
+          <strong>Programlama Dilleri:</strong>
+          <div class="skill-list">
+            <div class="skill-item">C#</div>
+            <div class="skill-item">Python</div>
+            <div class="skill-item">JavaScript</div>
+          </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <strong>Yazılım ve Araçlar:</strong>
+          <div class="skill-list">
+            <div class="skill-item">Visual Studio</div>
+            <div class="skill-item">Label Studio</div>
+            <div class="skill-item">Git</div>
+            <div class="skill-item">SQL Server</div>
+            <div class="skill-item">LaTeX</div>
+            <div class="skill-item">Unity</div>
+            <div class="skill-item">ASP.NET Core MVC</div>
+            <div class="skill-item">React Native</div>
+          </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <strong>Veri Tabanı Yönetimi:</strong>
+          <div class="skill-list">
+            <div class="skill-item">MSSQL</div>
+          </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <strong>Web Teknolojileri:</strong>
+          <div class="skill-list">
+            <div class="skill-item">HTML</div>
+            <div class="skill-item">CSS</div>
+          </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <strong>Özel Alanlar:</strong>
+          <div class="skill-list">
+            <div class="skill-item">Veri Analizi</div>
+            <div class="skill-item">Makine Öğrenmesi</div>
+            <div class="skill-item">Nesne Tespiti (YOLO)</div>
+            <div class="skill-item">Üretici Karşıt Ağlar (GAN)</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skill-category">
+        <h3><i class="fas fa-users"></i> Kişisel / Profesyonel Yetenekler</h3>
+        <div class="skill-list">
+          <div class="skill-item">Takım Çalışması</div>
+          <div class="skill-item">İletişim</div>
+          <div class="skill-item">Problem Çözme</div>
+          <div class="skill-item">Analitik Düşünme</div>
+          <div class="skill-item">Zaman Yönetimi</div>
+          <div class="skill-item">Liderlik</div>
+          <div class="skill-item">Yaratıcılık</div>
+          <div class="skill-item">İngilizce (Orta Seviye)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Deneyim</h2>
+    <ul>
+      <li><strong>Freelance Yazılım Geliştirici</strong> – Bionluk Platform · Uzaktan Çalışma · Nisan 2025 - Günümüz<br>
+      Çeşitli müşteriler için özel yazılım çözümleri geliştirme, C# ve diğer modern teknolojilerle web ve masaüstü uygulamaları tasarlama, müşteri ihtiyaçlarına göre özelleştirilmiş projeler sunma.</li>
+      
+      <li><strong>Yazılım Mühendisi (Stajyer)</strong> – Video Analitik Şirketi · Temmuz 2024 - Ağustos 2024 · Pendik, İstanbul<br>
+      Mikrodenetleyici programlama, embedded sistem geliştirme, video analitik sistemleri için alt yapı yazılımları geliştirme ve test etme süreçlerinde aktif rol alma.</li>
+      
+      <li><strong>Bilgi İşlem Programcısı (Stajyer)</strong> – Başakşehir Belediyesi · Temmuz 2023 - Eylül 2023 · Başakşehir, İstanbul<br>
+      Belediye bilgi işlem sistemlerinin geliştirilmesi, C# ile uygulama geliştirme, sistem yönetimi ve kullanıcı destek hizmetleri sunma.</li>
+    </ul>
+  </section>
+
+  <section id="certificates">
+    <h2>Sertifikalar</h2>
+    <ul>
+      <li><strong>Artificial Intelligence in Healthcare Conference Certificate</strong> – Kütahya Sağlık Bilimleri Üniversitesi, Nisan 2024<br>
+      Sağlık alanında yapay zeka uygulamaları konferansına katılım, sunum becerileri geliştirme ve medikal AI teknolojileri hakkında bilgi edinme.</li>
+      
+      <li><strong>C# Programming and SQL Database Management</strong> – Udemy Online Platform<br>
+      Kapsamlı C# programlama eğitimi, nesne yönelimli programlama, veritabanı yönetimi ve SQL sorgu optimizasyonu konularında uzmanlaşma.</li>
+      
+      <li><strong>Game Development with Unity Engine</strong> – Udemy Online Platform<br>
+      Unity game engine ile oyun geliştirme, C# scripting, 2D/3D oyun mekaniği tasarımı ve oyun optimizasyonu teknikleri.</li>
+      
+      <li><strong>Advanced C Programming</strong> – Udemy Online Platform<br>
+      C programlama dilinde ileri seviye konular, bellek yönetimi, pointer kullanımı ve sistem programlama teknikleri.</li>
+      
+      <li><strong>Java Programming Fundamentals</strong> – Udemy Online Platform<br>
+      Java programlama dilinin temel kavramları, nesne yönelimli programlama prensipleri ve uygulama geliştirme.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>İletişim</h2>
+    <p>Benimle iletişime geçmek için aşağıdaki kanalları kullanabilirsiniz:</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <h3>E-posta</h3>
+        <p><a href="mailto:emrakkaya199@gmail.com">emrakkaya199@gmail.com</a></p>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <h3>Telefon</h3>
+        <p><a href="tel:+905533082019">+90 553 308 20 19</a></p>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-github"></i>
+        <h3>GitHub</h3>
+        <p><a href="https://github.com/eakkaya0" target="_blank">github.com/eakkaya0</a></p>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-linkedin"></i>
+        <h3>LinkedIn</h3>
+        <p><a href="https://www.linkedin.com/in/emre-akkaya-1b6754286/" target="_blank">LinkedIn Profilim</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Emre Akkaya | Tüm Hakları Saklıdır
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        const offsetTop = targetElement.offsetTop - 100;
+        
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
